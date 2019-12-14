@@ -15,11 +15,12 @@ def load_image(img_path):
 
 val_dir = os.listdir('data/validation')
 
-for i in range(len(val_dir)):
-    alphabet = 
-            ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
+
+alphabet = [ 
+            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
             "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W",
             "X", "Y", "Z", "del", "nothing", "space"]
+for i in range(len(val_dir)):
     filename = 'data/validation/'+val_dir[i]+'/'+val_dir[i]+'_test.jpg'
     print(filename + ": ")
     print(alphabet[np.argmax(model.predict(load_image(filename)))])
