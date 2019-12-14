@@ -7,11 +7,9 @@ from tensorflow.keras.layers import Dense, Conv2D, Flatten, Dropout, MaxPooling2
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.callbacks import ModelCheckpoint
 
-
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-
 
 PATH = "data"
 

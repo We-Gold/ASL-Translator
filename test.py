@@ -1,6 +1,7 @@
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
+import os
 import numpy as np
 
 model = load_model("model.h5")
@@ -12,5 +13,7 @@ def load_image(img_path):
     img_tensor /= 255.                                      
     return img_tensor
 
+val_dir = os.listdir('data/validation')
 
-print(np.argmax(model.predict(load_image('data/validation/A/A_test.jpg'))))
+for i in range(len(val_dir)):
+    print(np.argmax(model.predict(load_image('data/validation/'+val_dir[i]+'/'+val_dir[i]+'_test.jpg'))))
