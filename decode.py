@@ -8,8 +8,8 @@ while True:
     _, frame = webcam.read()
     cv2.imshow("WEGOLD", frame)
 
-    if cv2.waitKey() == ord('q'):
+    if cv2.waitKey(16) == ord('q'):
         break
 
-webcam.release()
+#webcam.release()
 cv2.destroyAllWindows()
