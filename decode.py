@@ -5,12 +5,16 @@ import cv2
 import test as model
 
 window = tkinter.Tk()
+
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+
 webcam = cv2.VideoCapture(0)
 
-webcamFrame = tkinter.Frame(window, width=1280, height=720)
+webcamFrame = tkinter.Frame(window, width=screen_width, height=screen_height)
 webcamLabel = tkinter.Label(window)
 webcamLabel.pack()
-aslCharText = tkinter.Text(window, height=2, width=30)
+aslCharText = tkinter.Text(window, height=2, width=30, bd = 0)
 aslCharText.pack()
 
 frameCount = 0

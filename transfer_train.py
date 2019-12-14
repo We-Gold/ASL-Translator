@@ -17,8 +17,8 @@ base_model = MobileNet(weights = 'imagenet',include_top = False)
 
 x = base_model.output
 x = GlobalAveragePooling2D()(x)
-x = Dense(512,activation = 'relu')(x) 
-x = Dense(256,activation = 'relu')(x)
+x = Dense(1024,activation = 'relu')(x) 
+x = Dense(512,activation = 'relu')(x)
 preds = Dense(29,activation = 'softmax')(x)
 
 # Initialize the full model.
@@ -50,7 +50,7 @@ step_size_train = train_generator.n//train_generator.batch_size
 # Train and save the model
 model.fit_generator(generator = train_generator,
                    steps_per_epoch = step_size_train,
-                   epochs = 5,
+                   epochs = 4,
                    callbacks = [checkpoints])
 
-model.save("model1.h5")
+model.save("model2.h5")
