@@ -30,7 +30,8 @@ for layer in model.layers[20:]:
     layer.trainable=True
 
 
-train_datagen=ImageDataGenerator(preprocessing_function=preprocess_input) 
+#train_datagen=ImageDataGenerator(preprocessing_function=preprocess_input) 
+train_datagen=ImageDataGenerator(rescale=1./255, rotation_range=15, width_shift_range=0.25, height_shift_range=0.25)
 
 train_generator=train_datagen.flow_from_directory('data/train',
                                                  target_size=(200,200),
@@ -52,4 +53,4 @@ model.fit_generator(generator=train_generator,
                    epochs=5,
                    callbacks=[checkpoints])
 
-model.save("model.h5")
+model.save("model1.h5")

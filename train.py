@@ -27,13 +27,13 @@ total_val = len(os.listdir(validation_dir))
 for token in os.listdir(train_dir):
     total_train += len(os.listdir(train_dir + "/" + token))
 
-train_image_generator = ImageDataGenerator(rescale=1./255)
-validation_image_generator = ImageDataGenerator(rescale=1./255)
+train_image_generator = ImageDataGenerator(rescale=1./255, rotation_range=15, width_shift_range=0.25, height_shift_range=0.25)
+validation_image_generator = ImageDataGenerator(rescale=1./255, rotation_range=15, width_shift_range=0.25, height_shift_range=0.25)
 
 train_data_gen = train_image_generator.flow_from_directory(batch_size=batch_size,directory=train_dir,shuffle=True,target_size=(IMG_HEIGHT, IMG_WIDTH),class_mode='categorical')
 val_data_gen = validation_image_generator.flow_from_directory(batch_size=batch_size,directory=validation_dir,shuffle=True,target_size=(IMG_HEIGHT, IMG_WIDTH),class_mode='categorical')
 
-model = Sequential([
+'''model = Sequential([
     Conv2D(16, (3,3), activation='relu', input_shape=(IMG_HEIGHT, IMG_WIDTH ,3)),
     MaxPooling2D(),
     Dropout(0.5),
@@ -47,18 +47,21 @@ model = Sequential([
     Dense(29, activation='softmax')
 ])
 
+model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['accuracy']) #may switch to sparse
+
+model.summary()
+'''
+
 filepath="checkpoints/weights-improvement-{epoch:02d}-{val_accuracy:.2f}.hdf5"
 checkpoint = ModelCheckpoint(filepath, monitor='val_accuracy', verbose=1, save_best_only=True, mode='max')
 callbacks_list = [checkpoint]
 
-model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['accuracy']) #may switch to sparse
-
-model.summary()
+model = load_model("model.h5")
 
 history = model.fit_generator(
     train_data_gen,
-    steps_per_epoch=50,#total_train // batch_size,
+    steps_per_epoch=total_train // batch_size,
     epochs=epochs
 )
 
-model.save("model.h5")
+model.save("model1.h5")
