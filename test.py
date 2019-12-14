@@ -4,7 +4,7 @@ from tensorflow.keras.preprocessing import image
 import os
 import numpy as np
 
-model = load_model("model.h5")
+model = load_model("model1.h5")
 
 def load_image(img_path):
     img = image.load_img(img_path, target_size=(200, 200))
