@@ -19,7 +19,7 @@ def aslToChar(filename):
     alphabet = [ 
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
         "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W",
-        "X", "Y", "Z", "del", "nothing", "space"]
+        "X", "Y", "Z", "del", "nothing", " "]
     return alphabet[np.argmax(model.predict(load_image(filename)))]
 
 #for i in range(len(val_dir)):

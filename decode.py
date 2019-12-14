@@ -14,8 +14,9 @@ aslCharText = tkinter.Text(window, height=2, width=30)
 aslCharText.pack()
 
 frameCount = 0
+previousCharacter = 'a'
 def update():
-    global frameCount
+    global frameCount, previousCharacter
     _, frame = webcam.read()
 
     imgtk = ImageTk.PhotoImage(
@@ -27,7 +28,13 @@ def update():
     if frameCount >= 15:
         frameCount = 0
         cv2.imwrite('asl.jpg', frame)
-        print(model.aslToChar('asl.jpg'), end="", flush=True)
+        character = model.aslToChar('asl.jpg')
+        if character == 'del':
+            aslCharText.delete("end-2c")
+        elif character != "nothing" and character != previousCharacter:
+            aslCharText.insert(tkinter.END, character)
+        previousCharacter = character
+
 
     webcamLabel.after(16, update)
     frameCount += 1
