@@ -6,8 +6,8 @@ import test as model
 
 window = tkinter.Tk()
 
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
+screen_width = window.winfo_screenwidth()
+screen_height = window.winfo_screenheight()
 
 webcam = cv2.VideoCapture(0)
 
